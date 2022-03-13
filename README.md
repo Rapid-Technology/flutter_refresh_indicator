@@ -1,4 +1,4 @@
-# flutter_refresh_indicator
+# Flutter Refresh Indicator
 
 A new Flutter project.
 
