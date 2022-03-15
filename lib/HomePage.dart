@@ -2,16 +2,12 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import 'FactoryData.dart';
+import 'MyLoading.dart';
 import 'User.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,16 +16,10 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.green[700],
         centerTitle: true,
       ),
-      body: NotificationListener<OverscrollIndicatorNotification>(
-        onNotification: (overScroll) {
-          overScroll.disallowGlow();
-          return true;
-        },
-        child: ListView.builder(
-          itemCount: FactoryData.users.length,
-          itemBuilder: (BuildContext context, int index) =>
-              item(FactoryData.users[index]),
-        ),
+      body: ListView.builder(
+        itemCount: FactoryData.users.length,
+        itemBuilder: (BuildContext context, int index) =>
+            item(FactoryData.users[index]),
       ),
     );
   }
@@ -46,9 +36,10 @@ class _HomePageState extends State<HomePage> {
             image: DecorationImage(image: imageProvider, fit: BoxFit.cover),
           ),
         ),
-        placeholder: (context, url) => const CircularProgressIndicator(
-          strokeWidth: 2,
-          valueColor: AlwaysStoppedAnimation<Color>(Colors.green),
+        placeholder: (context, url) => SizedBox(
+          height: 40,
+          width: 40,
+          child: MyLoading(),
         ),
         errorWidget: (context, url, error) => const Icon(Icons.error),
       ),
