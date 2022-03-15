@@ -1,12 +1,34 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import 'FactoryData.dart';
 import 'MyLoading.dart';
 import 'User.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  RefreshController refreshController = RefreshController(initialRefresh: true);
+
+  List<User> users = [];
+
+  getUsers() async {
+    setState(() {
+      users.clear();
+    });
+    await Future.delayed(const Duration(seconds: 2));
+
+    setState(() {
+      users.addAll(FactoryData.users);
+    });
+    refreshController.refreshCompleted();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +38,20 @@ class HomePage extends StatelessWidget {
         backgroundColor: Colors.green[700],
         centerTitle: true,
       ),
-      body: ListView.builder(
-        itemCount: FactoryData.users.length,
-        itemBuilder: (BuildContext context, int index) =>
-            item(FactoryData.users[index]),
+      body: SmartRefresher(
+        controller: refreshController,
+        header: WaterDropHeader(
+          waterDropColor: Colors.green.shade700,
+          refresh: MyLoading(),
+          complete: Container(),
+          completeDuration: Duration.zero,
+        ),
+        onRefresh: () => getUsers(),
+        child: ListView.builder(
+          itemCount: users.length,
+          itemBuilder: (BuildContext context, int index) =>
+              item(users[index]),
+        ),
       ),
     );
   }
