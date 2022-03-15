@@ -48,7 +48,7 @@ class FactoryData {
       id: 7,
       name: "Reza Qazi zada",
       email: "reza.qazi.zada@kabul.af",
-      photo: "http://wikicraze.com/wp-content/uploads/2018/08/alone-boy-5.jpg",
+      photo: "https://www.adobe.com/express/create/media_1c6fc2df39cf891716e5986fbfed3870ea73e4a81.jpeg?width=400&format=jpeg&optimize=medium",
     ),
   ];
 }

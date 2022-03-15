@@ -20,10 +20,16 @@ class _HomePageState extends State<HomePage> {
         backgroundColor: Colors.green[700],
         centerTitle: true,
       ),
-      body: ListView.builder(
-        itemCount: FactoryData.users.length,
-        itemBuilder: (BuildContext context, int index) =>
-            item(FactoryData.users[index]),
+      body: NotificationListener<OverscrollIndicatorNotification>(
+        onNotification: (overScroll) {
+          overScroll.disallowGlow();
+          return true;
+        },
+        child: ListView.builder(
+          itemCount: FactoryData.users.length,
+          itemBuilder: (BuildContext context, int index) =>
+              item(FactoryData.users[index]),
+        ),
       ),
     );
   }
