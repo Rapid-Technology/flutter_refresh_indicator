@@ -1,6 +1,6 @@
 # Flutter Refresh Indicator
 
-A new Flutter project.
+[![IMAGE ALT TEXT HERE](https://i.ytimg.com/vi/BfyZzwhk68E/maxresdefault.jpg)](https://www.youtube.com/watch?v=BfyZzwhk68E)
 
 ## Getting Started
 
